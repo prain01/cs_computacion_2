@@ -1,0 +1,32 @@
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <script>
+            var estados="s0,s4,fin";
+            var alfabeto="a,b,c";
+            var delta="(s0,a,A)=s0/AA;(s0,a,W)=s0/AW;(s0,b,A)=s4/_;(s4,c,A)=s0/A;(s4,b,A)=s4/_;(s4,a,AA)=s4/_;(s0,c,W)=fin/_";
+            var finales="s4,fin";
+            var inicial="s0";
+            var pila_inicial="W";
+            //para desempilar usar: _
+            
+            //crear variables para proceso automata con pila
+            var transicion=delta.split0(";");
+            var final=finales.split(",");
+            var par=[];
+            var resultado=[];
+            var nuevotope=[];
+            var taux;
+            var stopmsg="Proceso Normal";
+            var traza="";
+            
+            //prepara vectores globales para transiciones
+            for (var i=0;i<transicion.length;i++){
+                taux=transicion[i].split("=");
+                par.push(taux[0]);
+                resultado.push(taux[1].split("/")[0]);
+                resultado.push(taux[1].split("/")[1]);
+            }
+        </script>
+    </head>
+</html>
