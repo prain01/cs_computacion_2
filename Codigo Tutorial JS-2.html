@@ -1,0 +1,43 @@
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/hmtl;charset=ISO-8859-1">
+        <script>
+            function testexpreg(){
+                var exp=document.getElementById("expreg").value;
+                var txt=document.getElementById("valores");
+                var val=txt.value.split("\n");
+                if(val.length>0){
+                    rege=new RegExp(exp);
+                    var i=0;
+                    ret='Uso de expresi&oacute;n regular: '+rege.toString()+'<br/>';
+                    for(; i<val.length;i++){
+                        ret+=val[i]+' &rarr; '+rege.test(val[i])+"<br>";
+                    }
+                    document.getElementById("resultado").innerHTML=ret;
+                }else{
+                    alert("Debe ingrear valores a probar");
+                }
+            }
+        </script>
+    </head>
+
+    <body>
+        Prueba de espresiones regulares en JavaScript 
+        <hr/>
+        <!-- (Prof. Dr. Carlos Cares) -->
+        ExpReg: <input type="text" name="expreg" id="expreg"><br>
+        Valores:<br>
+        <table>
+            <tr>
+                <td>
+                    <textarea id="valores" cols="50" rows="15">
+Pegue aqu&iacute; sus expresiones a evaluar
+                    </textarea><br>
+                </td>
+                <td id="resultado"></td>
+            </tr>
+        </table>
+        <input type="button" value="Procesar" onclick="testexpreg()">
+        <hr/>
+    </body>
+</html>

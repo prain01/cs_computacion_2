@@ -1,0 +1,49 @@
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html";charset=UTF-8>
+        <title>Tutorial 1-ADF</title>
+        <script>
+            function proceso(){
+                var tx =document.getElementById("txt01");
+                var palabra = tx.value.split("\n");
+                var out="";
+                for(var i=0; i<palabra.length;i++){
+                    out+= (1+i)+".- "+palabra[i]+" -->"+afd(palabra[i])+"<BR>"; 
+                }
+                document.getElementById("salida").innerHTML=out;
+            }
+
+            function afd(palabra){
+                
+                var letra =['a','b'];
+                var estado=['apb0','aib0','apb1','aib1','apb2','aib2'];
+                var final=['apb2'];
+                var actual='apb0';
+                var delta=[ [1,0,3,2,5,4],
+                            [2,3,4,5,4,5]];
+                for(var i=0;i<palabra.length ;i++){
+                    var l=palabra.charAt(i);
+                    var ix_l=letra.indexOf(l);
+                    if(ix_l==-1) return"error, letra "+l+" no es parte del alfabeto";
+                    var ix_e=estado.indexOf(actual);
+                    if(ix_e==-1) return "error, no hay definicion para estado "+actual;
+                    actual=estado[delta[ix_l][ix_e]];
+                }
+                return final.indexOf(actual)!=-1;
+            }
+        </script>
+    </head>
+    <body>
+        <h1>Ingrese palabras a procesar</h1>
+        <table border="0">
+            <tr>
+                <td>
+                    <textarea id="txt01" rows="10" cols="40" >Escriba sus palabras aqui</textarea>  
+                </td>
+                <td id="salida"></td>
+            </tr>
+        </table>
+        <br>
+        <button onclick="proceso()">procesar palabras</button>
+    </body>
+</html>    

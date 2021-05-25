@@ -1,0 +1,87 @@
+<html>
+    <head>
+        <title>AFND</title>
+        <script>
+            var _traza='';
+            function procesarPalabras(){
+                var tx=document.getElementById("palstx");
+                var pal=tx.value.split("\n");
+                var res=document.getElementById("salida");
+                res.innerHTML="";
+                for(var i=0;i<pal.length;i++){
+                    console.log('Palabra en proceso '+pal[i]);
+                    res.innerHTML+="<br>"+pal[i]+"  ->  "+procesoAutomata(pal[i]);
+                }
+                document.getElementById('salida').innerHTML+=_traza;
+            }
+            function procesoAutomata(palabra){ 
+                var alfabeto=['a','b','c'];
+                var estadosActuales=[0,5];
+                var estadosFinales=[4,9];
+
+                /*filas=estados*/
+                /*columnas=simbolos del alfabetos*/
+                var delta=[     [[],    [],     [1]],    /*0*/
+                                [[2],    [],     []],    /*1*/
+                                [[],    [3],     []],    /*2*/
+                                [[],    [],     [4]],    /*3*/
+                                [[4],    [4],     [4]],    /*4*/
+                                [[5],    [5],     [5,6]],    /*5*/
+                                [[7],    [],     []],    /*6*/
+                                [[],    [8],     []],    /*7*/
+                                [[],    [9],     []],    /*8*/
+                                [[],    [],     []]];    /*9*/
+                
+                for(var k=0;k<palabra.length && estadosActuales.length>0;k++){
+                    _traza+='<hr>Procesando Palabra '+palabra+' letra '+palabra.charAt(k)+"<br>";
+                    var estadosFuturos=[];
+                    /*RECORRE EL ALFABETO BUSCANDO COINCIDENCIAS ENTRE EL ALFABETO Y LA LETRA DE LA PALABRA*/
+                    for(var estado of estadosActuales){
+                        for(var i=0;i<alfabeto.length;i++){
+                            if(palabra.charAt(k)==alfabeto[i]){
+                                delta[estado][i].forEach( e => estadosFuturos.push(e));
+                            }
+                        }
+                        _traza+='<br>   estado '+estado+'   --> ';
+                        for(var i=0;i<estadosFuturos.length;i++){
+                            _traza+=' '+estadosFuturos[i];
+                        }
+                    }
+                    estadosActuales=[... new Set(estadosFuturos)];
+                }
+                /*VERIFICA SI ALGUNO DE LOS ESTADOS FINALES SE ENCUENTRA EN EL ARREGLO DE ESTADOS FUTUROS*/
+                for(var condicion of estadosFinales){
+                    if(estadosActuales.includes(condicion)){
+                        _traza+='<br><h4>Aceptada: '+estadosActuales.includes(condicion)+'</h4><br>';
+                        return (estadosActuales.includes(condicion))
+                    }    
+                }
+                return false;
+            }
+        </script>
+    </head>
+    <body>
+        <h2>Prueba AFND</h2>
+        <textarea   id="palstx" cols="15" rows="7">
+x comienza con cabc
+cabcab
+cabccabc
+cabcac
+cabc
+cab
+acabc
+cabacab 
+---------
+x termina con cabb
+cabccabb
+cabcabb
+acabb
+cabb
+cab
+cabba
+cabbb
+</textarea>
+        <input type="button"    value="Procesar"    onclick="procesarPalabras()">
+        <div id="salida"></div>
+    </body>
+</html>
