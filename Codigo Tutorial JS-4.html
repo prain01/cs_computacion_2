@@ -27,6 +27,35 @@
                 resultado.push(taux[1].split("/")[0]);
                 resultado.push(taux[1].split("/")[1]);
             }
+
+            function procesaTodo(){
+                traza="";
+                var txArea=document.getElementById('todo');
+                var tx=txArea.value;
+                var pal=tx.split("\n");
+                var out="";
+                for(var i=0;i<pal.length;i++){
+                    stopmsg="Proceso Normal";
+                    traza+="<br><br><u><b>Procesando "+pal[i]+"</b></u>";
+                    out+=pal[i]+ " --> "+procesaPalabra(pal[i])+"<br>";
+                }
+                document.getElementById('salida').innerHTML=out;
+                document.getElementById('pasos').innerHTML=traza;
+            }
+
+
+            function procesaPalabraa(palabra){
+                var letra=palabra.split("");
+                var actual=inicial+","+pila_inicial;
+                for(var i=0;i<letra.length && actual!='error';i++){
+                    traza+="<br> "+letra[i]+" en "+actual;
+                    actual=cambiaEstado(letra[i],actual);
+                    traza+="--> "+actual;
+                }
+
+                traza+="<br>"+stopmsg;
+                return final.includes(actual.split(",")[0]);
+            }
         </script>
     </head>
 </html>
