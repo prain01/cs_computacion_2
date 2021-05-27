@@ -90,6 +90,32 @@
                 document.write(msg);
             }
             
+
         </script>
     </head>
-</html>
+    <body>
+        
+        <h3>Automata Empilador</h3>
+        Estados={<script>w(estados);</script>}<br>
+        Alfabeto={<script>w(alfabeto);</script>}<br>
+        Transiciones={<script>w(delta.replace(/;/gi," , "));</script>}<br>
+        Finales={<script>w(finales);</script>}<br>
+        Inicialess={<script>w(inicial);</script>}<br>
+        Palabras a Procesar:<br>
+        <table>
+            <tr><td>
+                <textarea id="todo" cols="40" rows="12">
+aaaabbbb
+bbbaaa
+aaabbb
+                </textarea>
+            </td>
+            <td id="salida" bgcolor="#AAAAFF"></td>
+            </tr>
+        </table>
+        <br>
+        <input type="checkbox" id="traza" checked>Trazable
+        <button onclick="procesaTodo()">Procesar</button>
+        <div id="pasos"></div>
+    </body>
+    </html>
