@@ -56,6 +56,40 @@
                 traza+="<br>"+stopmsg;
                 return final.includes(actual.split(",")[0]);
             }
+
+            function cambiaEstado(letra,estadoComaPila){
+                var aux=estadoComaPila.split(",");
+                if(aux[1].length<=0){
+                    stopmsg="Intenta transicion con pila vacia";
+                    return "error";
+                }
+                var busca='('+aux[0]+','+letra+','+aux[1].charAt(0)+')';
+                var k=par.indexOf(busca);
+                if(k>=0){   //existe transicion
+                    if(nuevotope[k]=='_'){  //desempila
+                        return resultado[k]+','+pop(aux[1]);
+                    }else{
+                        return resultado[k]+','+newtop(aux[1],nuevotope[k]);}
+                }   //no existe transicion
+                else{
+                    stopmsg="Indeterminacion para "+busca;
+                    return "error";
+                }
+            }
+
+            function newtop(pilaString,tope){
+                pilaString=pop(pilaString);
+                return tope+pilaString;
+            }
+
+            function pop(pilaString){
+                return pilaString.substring(1);
+            }
+
+            function w(msg){
+                document.write(msg);
+            }
+            
         </script>
     </head>
 </html>
