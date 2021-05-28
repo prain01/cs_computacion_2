@@ -11,7 +11,7 @@
             //para desempilar usar: _
             
             //crear variables para proceso automata con pila
-            var transicion=delta.split0(";");
+            var transicion=delta.split(";");
             var final=finales.split(",");
             var par=[];
             var resultado=[];
@@ -25,7 +25,7 @@
                 taux=transicion[i].split("=");
                 par.push(taux[0]);
                 resultado.push(taux[1].split("/")[0]);
-                resultado.push(taux[1].split("/")[1]);
+                nuevotope.push(taux[1].split("/")[1]);
             }
 
             function procesaTodo(){
@@ -44,7 +44,7 @@
             }
 
 
-            function procesaPalabraa(palabra){
+            function procesaPalabra(palabra){
                 var letra=palabra.split("");
                 var actual=inicial+","+pila_inicial;
                 for(var i=0;i<letra.length && actual!='error';i++){
