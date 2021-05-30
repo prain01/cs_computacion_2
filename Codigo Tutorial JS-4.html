@@ -70,8 +70,8 @@
                         return resultado[k]+','+pop(aux[1]);
                     }else{
                         return resultado[k]+','+newtop(aux[1],nuevotope[k]);}
-                }   //no existe transicion
-                else{
+                }   
+                else{   //no existe transicion
                     stopmsg="Indeterminacion para "+busca;
                     return "error";
                 }
@@ -90,8 +90,15 @@
                 document.write(msg);
             }
             
-
+//OCULTAMIENTO DEL div
+            function mostrar_div(){
+                document.getElementById('pasos').style.display='block';
+            }
+            function ocultar_div(){
+                document.getElementById('pasos').style.display="none";
+            }
         </script>
+
     </head>
     <body>
         
@@ -107,7 +114,7 @@
                 <textarea id="todo" cols="40" rows="12">
 aaab
 aabb
-aaaaaaaaabbb
+c
 -------------
 abb
 baa
@@ -118,8 +125,9 @@ abaab
             </tr>
         </table>
         <br>
-        <input type="checkbox" id="traza" checked>Trazable
+        <input type="checkbox" id="traza" onclick="mostrar_div()" >Trazable
         <button onclick="procesaTodo()">Procesar</button>
-        <div id="pasos"></div>
+        <div id="pasos" style="display: none">
+        </div>
     </body>
     </html>
