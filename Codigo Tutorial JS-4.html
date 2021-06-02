@@ -90,12 +90,12 @@
                 document.write(msg);
             }
             
-//OCULTAMIENTO DEL div
-            function mostrar_div(){
-                document.getElementById('pasos').style.display='block';
-            }
-            function ocultar_div(){
-                document.getElementById('pasos').style.display="none";
+//ocultar/mostrar div
+            //segun el estado del checkbox se le asigna el estado 
+            //visible o oculto al div (div con id="pasos")
+            function mostrar_ocultar_div(traza){
+                var pasos =document.getElementById("pasos");
+                pasos.style.display=traza.checked ? "block" : "none";
             }
         </script>
 
@@ -125,9 +125,13 @@ abaab
             </tr>
         </table>
         <br>
-        <input type="checkbox" id="traza" onclick="mostrar_div()" >Trazable
         <button onclick="procesaTodo()">Procesar</button>
-        <div id="pasos" style="display: none">
-        </div>
+        <!--Cambio para ocultar/mostrar div-->
+        
+        <!--llama a la funcion mostrar_ocultar_div(this) con 
+        parametro=estado del checkbox-->
+        <input type="checkbox" id="traza" onclick="mostrar_ocultar_div(this)" >Trazable
+        <!--al div se le asigna estado oculto-->
+        <div id="pasos" style="display: none"></div>
     </body>
     </html>
