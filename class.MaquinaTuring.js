@@ -8,6 +8,7 @@ class MaquinaTuring{
         this.inicial="";
         this.cabezal=0;
         this.estados_finales=[];
+        this._traza='';
     }
 
     fija_estado_inicial(estado_){
@@ -50,24 +51,42 @@ class MaquinaTuring{
         }
         return null;
     }
-
+    
     procesaPalabra(palabra){
+        this._traza+='<hr>=================PROCESANDO PALABRA: '+"#"+palabra+"#===================="+"<br>";        
         this.cinta="#"+palabra+"#";
         this.cabezal=1;
         var pre,post,actual=1;
         var estado=this.inicial;
         var t=this.transicion_para(estado,this.cinta.charAt(this.cabezal));
-        while(t!=null){
+        while(t!=null){ 
             console.log(estado+' :'+this.cinta);
+            
+            this._traza+='<hr> | estado actual: '+estado+'| cinta actual: '+this.cinta;
+            
             pre=this.cinta.substr(0,this.cabezal);
             post=this.cinta.substr(this.cabezal+1);
             this.cinta=pre+t.escribe+post;
             this.mueve(t.mueve);
             estado=t.nuevoEstado;
+
+            this._traza+=   '| cabezales actuales: '+pre+' | estado futuro: '+t.nuevoEstado+
+                            '| cinta futura: '+(pre+t.escribe+post)+'| cabezales futuros: '+post+
+                            '| cabezal se mueve a: '+(t.mueve)+'<br>';
+
             t=this.transicion_para(estado,this.cinta.charAt(this.cabezal));
         }
-        console.log(estado+' :'+this.cinta);
-        return this.estados_finales.includes(estado);
+        if(this.estados_finales.includes(estado)){
+            this._traza+='<br> <hr>'+'<br><br>  <br><br>'
+            return true;
+        }else{
+            this._traza+='<hr> No existe transicion <hr><br>  <br><br>';
+            return  false;
+        }
+        
+    }
+    devolver_traza(){
+        return this._traza;
     }
 
     mueve(I_o_D){

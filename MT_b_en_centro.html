@@ -5,28 +5,51 @@
     <body>
         <script>
 
-            var bc=new MaquinaTuring("b en el centro");
-            bc.fija_estados("q0,q1,q2,f,r,s");
-            bc.fija_estado_inicial("q0");
+            var bc=new MaquinaTuring("(a^n)c(b^n)");
+            bc.fija_estados("s,p,t,w,v,f");
+            bc.fija_estado_inicial("s");
             bc.fija_estados_finales("f");
-            bc.agrega_transicion("q0","a","q1","X","D");
-            bc.agrega_transicion("q0","b","q2","X","D");
-            bc.agrega_transicion("q2","Y","f","Y","I");
-            bc.agrega_transicion("q2","a","q1","a","D");
-            bc.agrega_transicion("q2","b","q1","b","D");
-            bc.agrega_transicion("q1","b","q1","b","D");
-            bc.agrega_transicion("q1","a","q1","a","D");
-            bc.agrega_transicion("q1","Y","r","Y","I");
-            bc.agrega_transicion("q1","#","r","#","I");
-            bc.agrega_transicion("r","a","s","Y","I");
-            bc.agrega_transicion("r","b","s","Y","I");
-            bc.agrega_transicion("s","Y","s","Y","I");
-            bc.agrega_transicion("s","a","s","a","I");
-            bc.agrega_transicion("s","b","s","b","I");
-            bc.agrega_transicion("s","X","q0","X","D");
+            bc.agrega_transicion("s","c","p","c","D");
+            bc.agrega_transicion("s","a","t","A","D");
+            bc.agrega_transicion("p","B","p","B","D");
+            bc.agrega_transicion("p","#","f","#","I");
+            bc.agrega_transicion("t","a","t","a","D");
+            bc.agrega_transicion("t","c","w","c","D");
+            bc.agrega_transicion("w","B","w","B","D");
+            bc.agrega_transicion("w","b","v","B","I");
+            bc.agrega_transicion("v","a","v","a","I");
+            bc.agrega_transicion("v","c","v","c","I");
+            bc.agrega_transicion("v","B","v","B","I");
+            bc.agrega_transicion("v","A","s","A","D");
 
-            document.writeln(bc.procesaPalabra("aaaabbbb"));
-
+            //document.writeln(bc.procesaPalabra("aaaabbbb"));
+            
+            var _traza='';
+            
+            function procesar_palabras(){
+                var tx =document.getElementById("texto");
+                var palabras = tx.value.split("\n");
+                var res=document.getElementById("salida");
+                res.innerHTML="";
+                for(var i=0;i<palabras.length;i++){
+                    res.innerHTML+="<br>"+palabras[i]+"  ->  "+bc.procesaPalabra(palabras[i]);
+                }
+                document.getElementById('salida').innerHTML+=bc.devolver_traza();
+            }
         </script>
+
+        <h2>Maquina de Turing </h2>
+        <textarea id="texto" cols="20" rows="10">
+acb
+aaacbbb
+c
+-------------
+aacbc
+bca
+aaaacbbabb
+        </textarea>
+        <input type="button" value="Procesar" onclick="procesar_palabras()">
+        <div id="salida"></div>
     </body>
+
 </html>
