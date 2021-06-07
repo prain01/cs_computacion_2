@@ -2,10 +2,14 @@
     <head>
         <meta charset="UTF-8">
         <script>
-            var estados="s0,s4,fin";
-            var alfabeto="a,b,c";
+            var estados="s0,s1,s2,sf";
+            var alfabeto="a,b,";
             var delta="(s0,a,A)=s0/AA;(s0,a,W)=s0/AW;(s0,b,A)=s4/_;(s4,c,A)=s0/A;(s4,b,A)=s4/_;(s4,a,AA)=s4/_;(s0,c,W)=fin/_";
-            var finales="s4,fin";
+            //"(s0,a,W)=s1/AW;(s1,a,A)=s1/AA;(s1,a,W)=s1/AW;(s1,b,A)=s1/_;(s2,b,A)=s2/_;(s2,a,W)=s1/AW;(s2,_,W)=sf/_;"
+            //palabra de prueba: aabbabaaabbb -->aceptada
+            //pero el algoritmo no tiene la funcionalidad de salto espontanero (sin necesidad de procesar ninguna letra
+            //salta desde s2 a sf cuando el tope de la pila sea W, en este caso especifico)
+            var finales="sf";
             var inicial="s0";
             var pila_inicial="W";
             //para desempilar usar: _
