@@ -2,17 +2,17 @@
     <head>
         <meta charset="UTF-8">
         <script>
-            var estados="s0,s4,fin";
-            var alfabeto="a,b,c";
-            var delta="(s0,a,A)=s0/AA;(s0,a,W)=s0/AW;(s0,b,A)=s4/_;(s4,c,A)=s0/A;(s4,b,A)=s4/_;(s4,a,AA)=s4/_;(s0,c,W)=fin/_";
-            //"(s0,a,W)=s1/AW;(s1,a,A)=s1/AA;(s1,a,W)=s1/AW;(s1,b,A)=s1/_;(s2,b,A)=s2/_;(s2,a,W)=s1/AW;(s2,_,W)=sf/_;"
-            //palabra de prueba: aabbabaaabbb -->aceptada
-            //pero el algoritmo no tiene la funcionalidad de salto espontanero (sin necesidad de procesar ninguna letra
-            //salta desde s2 a sf cuando el tope de la pila sea W, en este caso especifico)
-            //estados={s0,s1,s2,sf}; alfabeto={"a,b"}; finales={sf};
-            var finales="s4,sf";
-            var inicial="s0";
-            var pila_inicial="W";
+            var estados="p0,p1,p2,p3,p4pf";
+            var alfabeto="b,c";
+            var delta="(p0,b,I)=p1/BI;(p0,c,I)=p2/CI;"+
+                      "(p1,b,C)=p3/_;(p1,b,I)=p3/BI;(p1,b,B)=p3/BB;(p1,c,C)=p2/_;"+
+                      "(p2,c,C)=p2/CC;(p2,c,I)=p2/CI;(p2,b,I)=p1/BI;(p2,b,C)=p1/_;"+
+                      "(p3,b,B)=p3/BB;(p3,b,I)=p3/BI;(p3,b,C)=p3/_;(p3,c,C)=p4/CC;(p3,c,I)=p4/CI;(p3,c,B)=pf/_;"+
+                      "(p4,b,I)=p4/BI;(p4,b,B)=p4/BB;(p4,c,I)=p4/CI;(p4,c,C)=p4/CC;(p4,b,C)=pf/_;(p4,c,B)=pf/_;"+
+                      "(pf,b,I)=p4/BI;(pf,b,B)=p4/BB;(pf,b,C)=p4/_;(pf,c,I)=p4/CI;(pf,c,B)=p4/_;(pf,c,C)=p4/CC;";
+            var finales="pf";
+            var inicial="p0";
+            var pila_inicial="I";
             //para desempilar usar: _
             
             //crear variables para proceso automata con pila
@@ -117,13 +117,14 @@
         <table>
             <tr><td>
                 <textarea id="todo" cols="40" rows="12">
-aaab
-aabb
-c
--------------
-abb
-baa
-abaab
+ccbbcb
+cbcb
+bbcbbc
+bbc
+cbb          
+cbbc
+cccccccccbbbc
+cccccbbccbbbbb
                 </textarea>
             </td>
             <td id="salida" bgcolor="#FFAAAA"></td>
