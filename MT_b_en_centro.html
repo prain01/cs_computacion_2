@@ -5,24 +5,29 @@
     <body>
         <script>
 
-            var bc=new MaquinaTuring("(a^n)c(b^n)");
-            bc.fija_estados("s,p,t,w,v,f");
-            bc.fija_estado_inicial("s");
-            bc.fija_estados_finales("f");
-            bc.agrega_transicion("s","c","p","c","D");
-            bc.agrega_transicion("s","a","t","A","D");
-            bc.agrega_transicion("p","B","p","B","D");
-            bc.agrega_transicion("p","#","f","#","I");
-            bc.agrega_transicion("t","a","t","a","D");
-            bc.agrega_transicion("t","c","w","c","D");
-            bc.agrega_transicion("w","B","w","B","D");
-            bc.agrega_transicion("w","b","v","B","I");
-            bc.agrega_transicion("v","a","v","a","I");
-            bc.agrega_transicion("v","c","v","c","I");
-            bc.agrega_transicion("v","B","v","B","I");
-            bc.agrega_transicion("v","A","s","A","D");
-
-            //document.writeln(bc.procesaPalabra("aaaabbbb"));
+            var bc=new MaquinaTuring("(b^n)(c^n)(a^2n)");
+            bc.fija_estados("s0,s1,s2,s3,s4,s5,s6,sf");
+            bc.fija_estado_inicial("s0");
+            bc.fija_estados_finales("sf");
+            bc.agrega_transicion("s0","#","sf","#","I");
+            bc.agrega_transicion("s0","b","s1","B","D");
+            bc.agrega_transicion("s0","C","s5","C","D");
+            bc.agrega_transicion("s1","b","s1","b","D");
+            bc.agrega_transicion("s1","C","s1","C","D");
+            bc.agrega_transicion("s1","c","s2","C","D");
+            bc.agrega_transicion("s2","A","s2","A","D");
+            bc.agrega_transicion("s2","c","s2","c","D");
+            bc.agrega_transicion("s2","a","s3","A","D");
+            bc.agrega_transicion("s3","a","s4","A","I");
+            bc.agrega_transicion("s4","A","s4","A","I");
+            bc.agrega_transicion("s4","b","s4","b","I");
+            bc.agrega_transicion("s4","c","s4","c","I");
+            bc.agrega_transicion("s4","C","s4","C","I");
+            bc.agrega_transicion("s4","B","s0","B","D");
+            bc.agrega_transicion("s5","C","s5","C","D");
+            bc.agrega_transicion("s5","A","s6","A","D");
+            bc.agrega_transicion("s6","A","s6","A","D");
+            bc.agrega_transicion("s6","#","sf","#","I");        
             
             var _traza='';
             
@@ -37,18 +42,24 @@
                 document.getElementById('salida').innerHTML+=bc.devolver_traza();
             }
         </script>
-
         <h2>Maquina de Turing: </h2>
-        <h3>(a^n)c(b^n)</h3>
+        <h3>(b^n)(c^n)(a^2n)</h3>
         <textarea id="texto" cols="20" rows="10">
-acb
-aaacbbb
-c
--------------
-aacbc
+
+bbbcccaaaaaa
+bbaaaacc
+----------------
+bcaa
+bbccaaaa
+bbbcccaaaaaa
+bbbbccccaaaaaaaa
+bbbbbbccccccaaaaaaaaaaaa
+----------------
 bca
-aaaacbbabb
-        </textarea>
+bbccaaa
+bcca
+bbcaa
+bbccaaaaa</textarea>
         <input type="button" value="Procesar" onclick="procesar_palabras()">
         <div id="salida"></div>
         
