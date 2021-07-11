@@ -2,17 +2,21 @@
     <head>
         <meta charset="UTF-8">
         <script>
-            var estados="p0,p1,p2,p3,p4pf";
+            var estados="p0,p1,p2,p3,p4,pf";
             var alfabeto="b,c";
-            var delta="(p0,b,I)=p1/BI;(p0,c,I)=p2/CI;"+
-                      "(p1,b,C)=p3/_;(p1,b,I)=p3/BI;(p1,b,B)=p3/BB;(p1,c,C)=p2/_;"+
-                      "(p2,c,C)=p2/CC;(p2,c,I)=p2/CI;(p2,b,I)=p1/BI;(p2,b,C)=p1/_;"+
-                      "(p3,b,B)=p3/BB;(p3,b,I)=p3/BI;(p3,b,C)=p3/_;(p3,c,C)=p4/CC;(p3,c,I)=p4/CI;(p3,c,B)=pf/_;"+
-                      "(p4,b,I)=p4/BI;(p4,b,B)=p4/BB;(p4,c,I)=p4/CI;(p4,c,C)=p4/CC;(p4,b,C)=pf/_;(p4,c,B)=pf/_;"+
-                      "(pf,b,I)=p4/BI;(pf,b,B)=p4/BB;(pf,b,C)=p4/_;(pf,c,I)=p4/CI;(pf,c,B)=p4/_;(pf,c,C)=p4/CC;";
+            var delta="(p0,b,I)=p2/BI;(p0,c,I)=p1/CI;"+
+                    "(p1,b,C)=p2/_;(p1,b,Y)=p2/_;(p1,c,I)=p1/CI;(p1,c,C)=p1/YC;(p1,c,Y)=p1/YY;(p1,c,B)=p1/_;(p1,c,X)=p1/_;"+
+                    "(p2,b,I)=p2/BI;(p2,b,B)=p2/XB;(p2,b,X)=p2/XX;(p2,b,C)=p2/_;(p2,b,Y)=p2/_;"+
+                    "(p2,c,I)=p3/CI;(p2,c,C)=p3/YC;(p2,c,Y)=p3/YY;(p2,c,B)=p3/_;(p2,c,X)=p3/_;"+
+                    "(p3,b,I)=p4/BI;(p3,b,B)=p4/XB;(p3,b,X)=p4/XX;(p3,b,C)=pf/_;(p3,b,Y)=p4/_;"+
+                    "(p3,c,I)=p1/CI;(p3,c,C)=p1/YC;(p3,c,Y)=p1/YY;(p3,c,B)=p1/_;(p3,c,X)=p1/_;"+
+                    "(p4,b,I)=p4/BI;(p4,b,B)=p4/XB;(p4,b,X)=p4/XX;(p4,b,Y)=p4/_;(p4,b,C)=pf/_;"+
+                    "(p4,c,I)=p4/CI;(p4,c,C)=p4/YC;(p4,c,Y)=p4/YY;(p4,c,X)=p4/_;(p4,c,B)=pf/_;"+
+                    "(pf,b,I)=p4/BI;(pf,c,I)=p4/CI;"
             var finales="pf";
             var inicial="p0";
             var pila_inicial="I";
+
             //para desempilar usar: _
             
             //crear variables para proceso automata con pila
@@ -117,15 +121,23 @@
         <table>
             <tr><td>
                 <textarea id="todo" cols="40" rows="12">
-ccbbcb
 cbcb
+bbcbcc
+bcbbcbcc
+bcbcbcbc
+bbbcbccc
+ccbcbb
+cbcbbbbccc
+----------------
 bbcbbc
-bbc
-cbb          
-cbbc
-cccccccccbbbc
-cccccbbccbbbbb
-                </textarea>
+bcb
+bcbb
+bcbcc
+bcbcbcc
+bcbcbcbb
+bcbbccb
+ccccbcbbbc
+</textarea>
             </td>
             <td id="salida" bgcolor="#FFAAAA"></td>
             </tr>
